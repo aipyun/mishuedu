@@ -1,0 +1,35 @@
+<div class="course-item">
+  <div class="course-img">
+    <a href="{{ path('course_show', {id: courseSet.course.id }) }}" target="_blank">
+      {% if courseSet.serializeMode == 'serialize' %}
+        <span class="tags"><span class="tag-serialing"></span></span>
+      {% elseif courseSet.serializeMode == 'finished' %}
+        <span class="tags"><span class="tag-finished"></span></span>
+      {% endif %}
+      {% if courseSet.type|default() == 'live' %}
+        <span class="tags">
+          <span class="tag-live"></span>
+        </span>
+      {% endif %}
+      {% if courseSet.type|default() == 'reservation' %}
+        <span class="tags">
+          <span class="tag-reservation"></span>
+        </span>
+      {% endif %}
+      <img class="img-responsive" src="{{ filepath(course_set_cover(courseSet, 'large'), 'courseSet.png') }}" alt="{{ courseSet.title }}">
+    </a>
+  </div>
+  <div class="course-info">
+    <div class="title">
+      <a class="link-dark" href="{{ path('course_show', {id: courseSet.course.id}) }}" target="_blank">
+        {{ courseSet.title }}
+      </a>
+    </div>
+    <div class="metas clearfix">
+      {% if setting('courseSet.show_student_num_enabled', '1') == 1  %}
+        <span class="num"><i class="es-icon es-icon-people"></i>{{ courseSet.studentNum }}</span>
+      {% endif %}
+      <span class="comment"><i class="es-icon es-icon-textsms"></i>{{ courseSet.ratingNum }}</span>
+    </div>
+  </div>
+</div>

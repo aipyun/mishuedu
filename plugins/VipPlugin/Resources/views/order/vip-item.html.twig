@@ -1,0 +1,38 @@
+<div class="order-center-card clearfix">
+  <div class="order-center-card__img">
+    <a href="{{ path('vip_course_explore', {levelId: product.targetId}) }}">
+      <img src="{{ product.picture|default(asset('assets/img/default/vip.png')) }}" alt="{{ product.title }}">
+    </a>
+  </div>
+  <div class="order-center-card__info">
+    <div class="order-center-card__title">
+      {% set buyType = product.buyType %}
+      {% set unit = product.unit %}
+
+      {% if buyType == "upgrade" %}
+        {{'order.vip_order.level_up_tips'|trans({'%level.name%':product.title})}}
+      {% elseif buyType == "renew" %}
+        {{ 'order.vip_order.renew_tips'|trans({'%level.name%':product.title,'%duration%':product.num})}}
+        {% if unit == "month" %}
+          {{'order.vip_order.total_months'|trans}}
+        {% elseif unit == "year" %}
+          {{'site.date.year'|trans}}
+        {% endif %}
+      {% else %}
+        {{'order.vip_order.buy_tips'|trans({'%level.name%':product.title,'%duration%':product.num})}}
+        {% if unit == "month" %}
+          {{'order.vip_order.total_months'|trans}}
+        {% elseif unit == "year" %}
+          {{'site.date.year'|trans}}
+        {% endif %}
+      {% endif %}
+    </div>
+    <div class="order-center-card__price" role="total-price">
+      {{ product.originPrice|price_format }}
+    </div>
+  </div>
+</div>
+
+<input type="hidden" name="buyType" value="{{ product.buyType }}" />
+<input type="hidden" name="unit" value="{{ product.unit }}" />
+<input type="hidden" name="num" value="{{ product.num }}" />

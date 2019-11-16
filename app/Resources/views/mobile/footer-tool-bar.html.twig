@@ -1,0 +1,14 @@
+{% set mobile = is_show_mobile_page() %}
+{% if mobile %}
+  <div class="fixed">
+    <div class="fixed_bg"></div>
+    <div class="btns">
+      <ul>
+        <li class="in01"><a href="javascript:void(0)"><i></i><span>客服</span></a></li>
+        <li class="in02"><a {% if mobile_tool_bar == 'course' %}style="color: #0075de;"{% endif %} href="{{ path('course_set_explore') }}"><i></i><span>课程</span></a><em>1</em></li>
+        <li class="in03"><a {% if mobile_tool_bar == 'index' %}style="color: #0075de;"{% endif %} href="{{ path('homepage') }}"><i></i><span>首页</span></a></li>
+        <li class="in04"><a {% if mobile_tool_bar == 'learning' %}style="color: #0075de;"{% endif %} href="{{ path('my_courses_learning') }}"><i></i><span>学习</span></a><em>1</em></li>
+        <li class="in05"><a href="/wap/login?goto=%2Fwap%2F"><i></i><span>我的</span></a><em>1</em></li>            </ul>
+    </div>
+  </div>
+{% endif %}

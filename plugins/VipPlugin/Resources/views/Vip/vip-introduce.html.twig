@@ -1,0 +1,94 @@
+<div class="vip-item-list">
+  <div class="container">
+    <div class="text-line gray">
+      <h5><span>会员详情</span><div class="line"></div></h5>
+    </div>
+    {% set level = levels[levelId|default(0)]|default(null) %}
+    {% if userVip|default(false) %}
+      {% set currentLevel = levels[userVip.levelId]|default(null) %}
+    {% endif %}
+    {% if levels|default(null) %}
+      {% if levelsCount >= 3 %}
+        <div class="vip-swiper-container row hidden-xs hidden-sm">
+          <div class="swiper-container">
+            <div class="swiper-wrapper">
+              {% for level in levels %}
+              <div class="swiper-slide col-md-4 {% if levelsCount > 3 %}swiper-hidden{% endif %}">
+                <div class="vip-swiper-item es-section">
+                  <div class="vip-thumb">
+                  <img src="{{ level.icon|default(asset('assets/v2/img/vip/vip_icon_bronze.png')) }}" alt="level.name">
+                  </div>
+                  <div class="vip-info">
+                    <p class="name">{{level.name}}</p>
+                    <p class="number">
+                      <span class="color-gray mrs">包含</span>
+                      {% if level.courseSetCount > 0 %}
+                        课程数：<span class="text-md">{{level.courseSetCount}}</span>
+                      {% endif %}
+                      {% if level.classroomCount > 0 %}
+                        <span class="mhs"> </span> 班级数：<span class="text-md">{{level.classroomCount}}</span>
+                      {% endif %}
+                    </p>
+                    {% if setting('coin.coin_enabled') and setting('coin.price_type') == 'Coin'%}
+                      {% if buyType == 10 %}
+                        <p class="price"><span>{{ set_price((level.monthPrice) * (cashRate))  }}</span>{{setting('coin.coin_name')}}/月</p>
+                        <p class="price"><span>{{ set_price((level.yearPrice) * (cashRate))  }}</span>{{setting('coin.coin_name')}}/年</p>
+                      {% elseif buyType == 20 %}
+                        <p class="price"><span>{{ set_price((level.yearPrice) * (cashRate))  }}</span>{{setting('coin.coin_name')}}/年</p>
+                      {% else %}
+                        <p class="price"><span>{{ set_price((level.monthPrice) * (cashRate))  }}</span>{{setting('coin.coin_name')}}/月</p>
+                      {% endif %}
+                    {% else %}
+                      {% if buyType == 10 %}
+                        <p class="price"><span>{{ level.monthPrice }}</span>元/月</p>
+                        <p class="price"><span>{{ level.yearPrice }}</span>元/年</p>
+                      {% elseif buyType == 20 %}
+                        <p class="price"><span>{{ level.yearPrice }}</span>元/年</p>
+                      {% else %}
+                        <p class="price"><span>{{ level.monthPrice }}</span>元/月</p>
+                      {% endif %}
+                    {% endif %}
+                  </div>
+                  <div class="vip-content" title="{{ level.description|raw }}">
+                  {{ level.description|raw|nl2br }}
+                  </div>
+                  <div class="vip-item-footer">
+                    {% if level and level.seq >= currentLevel.seq|default(0) %}
+                      {% if buyButtonStatus|default("show") == "show" %}
+                        {% if userVip|default(null) == null %}
+                          <a class="btn btn-danger btn-lg btn-block" href="{{ path('vip_buy', {level:level.id}) }}">立即购买</a>
+                        {% elseif level.id == userVip.levelId|default(null) %}
+                          <a class="btn btn-warning btn-lg btn-block" href="{{ path('vip_buy', {level:level.id}) }}">立即续费</a>
+                        {% else %}
+                          <a class="btn btn-warning btn-lg btn-block" href="{{ path('vip_upgrade', {targetId:level.id}) }}">立即升级</a>
+                        {% endif %}
+                      {% endif %}
+                    {% else %}
+                      <button type="button" class="btn btn-default btn-lg btn-block" disabled="disabled" >立即购买</button>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+          <a class="arrow-left hidden" href="#"><i class="es-icon es-icon-chevronleft"></i></a>
+          <a class="arrow-right hidden" href="#"><i class="es-icon es-icon-chevronright"></i></a>
+        </div>
+        <div  class="visible-xs visible-sm">
+          {% for level in levels %}
+            {% include 'VipPlugin:Vip:vip-item.html.twig' %}
+          {% endfor %}
+        </div>
+      {% else %}
+        {% for level in levels %}
+          {% include 'VipPlugin:Vip:vip-item.html.twig' %}
+        {% endfor %}
+      {% endif %}
+    
+    {% else %}
+    <div class="empty">暂无可加入的会员</div>
+    {% endif %}
+  </div>
+</div>
+  

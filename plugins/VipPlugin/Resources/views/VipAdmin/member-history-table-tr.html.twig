@@ -1,0 +1,51 @@
+<tr id="member-history-table-tr-{{ memberHistory.id }}">
+
+  <td>
+    {% if not isModal %}
+    <a href="#modal" role="show-user" data-toggle="modal" data-url="{{ url('admin_user_show', {id:memberHistory.userId}) }}">{{ user.nickname }}</a>
+    {% else %}
+    {{ user.nickname }}
+    {% endif %}
+  </td>
+  <td>
+    {{ memberHistory.boughtTime | date('Y-m-d H:i:s') }}
+    <br>
+  </td>
+
+  <td>
+    {{ memberHistory.deadline | date('Y-m-d') }}
+    <br>
+  </td>
+
+  <td>
+    {{ dict_text('boughtType',memberHistory.boughtType) }}
+    <br>
+    {% if memberHistory.operatorId > 0 %}
+      <small>(操作人：{{ operators[memberHistory.operatorId].nickname|default('--') }})</small>
+    {% endif %}
+  </td>
+
+  <td>
+    {{ level }}
+    <br>
+  </td>
+
+  <td>
+    {% if memberHistory.boughtDuration != 0 %}
+  {{ memberHistory.boughtDuration }} {{ dict_text('duration_unit',memberHistory.boughtUnit) }}
+   {% else %}
+    --
+    {% endif %}
+    <br>
+  </td>
+
+  <td>
+  {% if memberHistory.priceType == 'Coin' %}
+ {{ memberHistory.boughtAmount }}{{setting('coin.coin_name')}}
+  {% else %}
+ {{ memberHistory.boughtAmount }}元
+ {% endif %}
+  </td>
+
+</tr>
+

@@ -1,0 +1,10 @@
+{
+    "code": "Coupon",
+    "name": "优惠码",
+    "description": "在为如何推广您的优质课程而烦恼吗？“优惠码”能够祝您一臂之力！众多功能让您轻松制作出个性优惠码！再通过各种渠道将您的优惠码发放出去。",
+    "author": "EduSoho官方",
+    "version": "2.2.7",
+    "protocol": "3",
+    "support_version": "8.3.18+",
+    "manage_index": "admin_coupon"
+}

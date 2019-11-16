@@ -1,0 +1,51 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}{{ 'vip.buy.title' | trans }} - {{ parent() }}{% endblock %}
+
+{% do script(['libs/jquery-validation.js', 'vipplugin/js/order/buy/index.js']) %}
+
+{% set type = 'new' %}
+
+{% block content %}
+
+<div class="es-row-wrap container-gap" style="min-height:500px;">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="page-header"><h1>{{ 'vip.buy.title' | trans }}</h1></div>
+    </div>
+  </div>
+  {% if not levels %}
+  <div class="row">
+    <div class="col-md-12">
+      <div class="alert alert-info">
+      {% if isAdmin %}
+        {{ 'vip.buy.not_open_level_admin_tips' | trans({"%vipLevelUrl%": "{{ path('admin_vip_level') }}"}) | raw }}
+      {% else %}
+       {{ 'vip.buy.not_open_level_tips' | trans }}
+      {% endif %}
+      </div>
+    </div>
+  </div>
+  {% else %}
+    <form class="form-horizontal" id="member-buy-form" data-try-buy-url="{{ path('vip_try_buy') }}" action="{{ path('order_show') }}">
+      <input type="hidden" name="targetType" value="vip"/>
+      <div class="form-group">
+        <label class="col-sm-3 control-label">{{ 'vip.buy.level' | trans }}</label>
+        <div class="col-sm-8 radios">
+          {{ radios('targetId', levels, selectedLevel) }}
+        </div>
+      </div>
+
+      {% include "VipPlugin:VipOrder:buy-form-common.html.twig" %}
+      <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-8">
+          <button type="button" class="btn btn-primary btn-buy-vip" >{{ 'vip.buy.confirm_btn' | trans }}</button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+  {% endif %}
+
+</div>
+{% endblock %}

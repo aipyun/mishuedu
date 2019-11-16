@@ -1,0 +1,13 @@
+{% extends 'VipPlugin:Vip:layout.html.twig' %}
+
+{% block title %}会员专区 - {{ parent() }}{% endblock %}
+{% set menu = 'index' %}
+{% do script(['vipplugin/js/vip/index.js']) %}
+
+{% block vip_main %}
+  {{ render(controller('VipPlugin:Vip:vipBanner',{userVip: userVip|default(null)})) }}{#会员banner#}
+
+  {{ render(controller('VipPlugin:Vip:vipIntroduce',{userVip: userVip|default(null),levels: levels|default([])})) }}{#会员详情#}
+  {{ render(controller('VipPlugin:Vip:vipPrivilege',{levels: levels|default(null)})) }}{#会员特权#}
+  {{ render(controller('VipPlugin:Vip:vipNewestMember')) }}{#最新会员#}
+{% endblock %}

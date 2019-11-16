@@ -1,0 +1,43 @@
+log.action.vip.create_level: 创建会员等级
+log.action.vip.update_level: 更新会员等级
+log.action.vip.on_level: 开启会员
+log.action.vip.off_level: 关闭会员
+log.action.vip.delete_level: 删除会员等级
+log.action.vip.create_member: 会员新增
+log.action.vip.renew_member: 会员续费
+log.action.vip.upgrade_member: 会员升级
+log.action.vip.update_member: 会员更新
+log.action.vip.delete_member: 会员删除
+
+vip.buy.title: 会员购买
+vip.buy.confirm_btn: 确认购买
+vip.buy.level: 会员等级
+vip.buy.form.current: 您现在是
+vip.buy.from.open_time: 开通时长
+vip.buy.not_open_level_admin_tips: >
+  <h5>系统尚未设置会员等级，请先到管理后台设置会员等级<a href="%vipLevelUrl%" class="alert-link">，去设置</a></h5>
+vip.buy.not_open_level_tips: >
+  <h5>会员等级还未开通，请耐心等待网校开通</h5>
+vip.buy.month: 个月
+vip.buy.year: 年
+vip.buy.radios.month: 按月
+vip.buy.radios.year: 按年
+vip.buy.deadline_time_tips: >
+  有效期至 <strong class="deadline"></strong>
+
+vip.renew.title: 会员续费
+vip.renew.confirm_btn: 确认续费
+vip.renew.deadline_time_tips: >
+  有效期延长至 <strong class="deadline"></strong>
+
+vip.upgrade.title: 会员升级
+vip.upgrade.confirm_btn: 确认升级
+vip.upgrade.can_upgrade_to: 您可升级到
+vip.upgrade.tenewals_tips: >
+  会员剩余天数小于%deadlineTime%天，请先续费后再升级。
+
+vip.expired: 会员已过期
+vip.expired_end_time: >
+  有效期至 %deadlineTime%
+  (剩余 %lastDeadline%)
+  

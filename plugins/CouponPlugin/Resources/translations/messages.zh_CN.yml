@@ -1,0 +1,4 @@
+log.action.coupon.generate_coupon: 生成新优惠码
+log.action.template.coupon.generate_coupon: 生成了新批次优惠码(前缀:<strong class="color-success">%prefix%</strong> 批次:<strong class="color-success">%id%</strong>)
+log.action.coupon.delete_batch: 删除优惠码
+log.action.template.coupon.delete_batch: 删除了优惠码(前缀:<strong class="color-success">%prefix%</strong> 批次:<strong class="color-success">%id%</strong>)

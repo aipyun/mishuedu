@@ -1,0 +1,12 @@
+{% if setting('vip.enabled') %}
+
+  <div class="form-group cd-mt24">
+    <label class="col-sm-2 control-label">{{ '会员免费学'|trans }}</label>
+    <div class="col-sm-3">
+      <select class="form-control" name="vipLevelId">
+        {{ select_options(levels, course.vipLevelId, {0:'无'}) }}
+      </select>
+    </div>
+    <div class="col-sm-3 control-label text-left pl0">{{ '及以上会员免费学'|trans }}</div>
+  </div>
+{% endif %}

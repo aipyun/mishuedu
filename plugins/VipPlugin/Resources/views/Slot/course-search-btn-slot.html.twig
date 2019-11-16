@@ -1,0 +1,5 @@
+{% if setting('vip.enabled') and currentUserVipLevel %}
+  <li role="presentation" class="{% if filter == 'vip' %}active{% endif %}">
+    <a href="{{ path('search',{filter:'vip', 'q':keywords}) }}">{{'search.vip_courses'|trans}}</a>
+  </li>
+{% endif %}

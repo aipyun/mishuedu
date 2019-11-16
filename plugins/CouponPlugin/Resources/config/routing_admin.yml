@@ -1,0 +1,41 @@
+admin_coupon:
+    pattern: /coupon
+    defaults: { _controller: CouponPlugin:CouponBatch:index }
+
+admin_coupon_generate:
+    pattern: /coupon/generate
+    defaults: { _controller: CouponPlugin:CouponBatch:generate }
+
+admin_coupon_batch_create:
+    pattern: /coupon/batch/{batchId}/create
+    defaults: { _controller: CouponPlugin:CouponBatch:batchCreate }
+    methods: [POST]
+
+admin_coupon_checkprefix:
+    pattern: /coupon/checkprefix
+    defaults: { _controller: CouponPlugin:CouponBatch:checkPrefix }
+
+admin_coupon_delete:
+    pattern: /coupon/{id}/delete
+    defaults: { _controller: CouponPlugin:CouponBatch:delete }
+    methods: [POST]
+
+admin_coupon_query:
+    pattern: /coupon/index
+    defaults: { _controller: CouponPlugin:Coupon:index }
+
+admin_coupon_batch_export:
+    pattern: /coupon/export/csv/{batchId}
+    defaults: { _controller: CouponPlugin:CouponBatch:exportCsv }
+
+admin_coupon_show:
+    pattern: /coupon/show/{batchId}
+    defaults: { _controller: CouponPlugin:CouponBatch:detail }
+
+admin_coupon_setting:
+    pattern: /setting/coupon
+    defaults: { _controller: CouponPlugin:Coupon:setting }
+
+admin_coupon_get_receive_url:
+    pattern: /coupon/getreceiveurl/{batchId}
+    defaults: { _controller: CouponPlugin:CouponBatch:getReceiveUrl }

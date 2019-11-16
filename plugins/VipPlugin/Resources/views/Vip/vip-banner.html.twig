@@ -1,0 +1,51 @@
+  {% set vipSetting = setting('vip') %}
+  <div class="vip-banner" style="background:{{vipSetting.poster_bgcolor|default('#d3293c')}} ">
+    <div class="container">
+      <div class="vip-banner-thumb">
+        <img class="img-responsive" src="{{ asset(vipSetting.poster|default('assets/v2/img/vip/vip_banner.jpg')) }}" alt="">
+      </div>
+      <div class="vip-user hidden-sm hidden-xs">
+      {% if app.user %}
+        <a class="user-avatar" href="{{ path('user_show', {id:app.user.id}) }}">
+          <img  src="{{ file_path(app.user.mediumAvatar, 'avatar.png') }}" alt="">
+          {% if userVip|default(false) and userVip.deadline > nowTime %}
+            <span class="icon-user-status icon-md"><img src="{{level.icon|default(asset('assets/v2/img/vip/vip_icon_bronze.png'))}}" alt="" title="{{level.name|default('')}}"></span>
+          {% endif %}
+        </a>
+        <h3><a class="link-dark" href="{{ path('user_show', {id:app.user.id}) }}">{{ app.user.nickname }}</a></h3>
+        {% if userVip|default(false) %}
+          <p class="text-danger mbl">{{level.name|default('')}}</p>
+          <p><a class="btn btn-warning mrm" href="{{ path('vip_renew') }}">会员续费</a>
+          {% if nextlevel != null %}
+          <a class="btn btn-danger" href="{{ path('vip_upgrade') }}">升级会员</a></p>
+          {% endif %}
+          <p class="text-muted text-sm mtl">
+            {{ userVip.deadline|date('Y-m-d') }}到期,
+            {% if userVip.deadline < nowTime %}
+              <span class="text-danger">会员已过期</span>
+            {% elseif userVip.deadline|remain_time < 7 and userVip.deadline|remain_time > 0 %}
+              {% if deadlineAlertCookie == null %}
+                <span class="text-warning">即将到期，请及时续费哦。</span>
+              {% elseif  userVip.deadline  == nowTime %}
+                <span class="text-warning">明天到期，请及时续费哦。</span>
+              {% endif %}
+            {% else %}
+              剩余{{ userVip.deadline|remain_time('day') }}。
+            {% endif %}
+          </p>
+        {% else %}
+          <p class="text-muted mbl">您还不是会员</p>
+          <p><a class="btn btn-danger btn-xlg" href="{{ path('vip_buy') }}">开通会员</a></p>
+          <p class="text-muted text-sm mtl">开通会员，享受更多课程！</p>
+        {% endif %}
+      {% else %}
+        <a class="user-avatar">
+          <img src="{{ asset('assets/img/default/avatar.png') }}" alt="">
+        </a>
+        <h3><a class="link-dark">您好</a></h3>
+        <p class="text-muted mbl">请登录后查看会员状态</p>
+        <p><a class="btn btn-danger btn-xlg" href="{{ path('login', {goto:_target_path|default(path('vip'))}) }}">立即登录</a></p>
+      {% endif %}
+      </div>
+    </div>
+  </div>

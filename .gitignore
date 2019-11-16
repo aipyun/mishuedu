@@ -1,0 +1,9 @@
+/app/cache/*
+/app/logs/*
+/app/data/udisk/*
+/app/run
+/app/config/parameters.yml
+/web/files/*
+/.vscode
+/.idea
+.project

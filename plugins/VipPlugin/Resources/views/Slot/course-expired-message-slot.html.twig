@@ -1,0 +1,12 @@
+{# 教学计划取消会员设置和用户当前会员级别不符合的情况 #}
+{% if vipLevel or not currentVipLevel is empty %}
+  {% if vipStatus == 'member_expired' %}
+    您的会员已到期，请及时<a href="{{ path('vip_renew') }}" target="_blank">续费</a>，以便继续学习。
+  {% elseif vipStatus == 'not_member' %}
+    您已不是{{ vipLevel.name }}会员，请<a href="{{ path('vip_buy', {level: vipLevel.id}) }}" target="_blank">购买会员</a>后继续学习。
+  {% elseif vipStatus == 'level_low' %}
+    很抱歉，课程已不支持{{ currentVipLevel.name|default('') }}免费学，无法继续学习
+  {% elseif vipStatus == 'level_not_exist' %}
+    很抱歉，课程已不支持{{ currentVipLevel.name|default('') }}免费学，无法继续学习
+  {% endif %}
+{% endif %}

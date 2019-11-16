@@ -1,0 +1,88 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*---------全局----------*/
+html,body{-webkit-text-size-adjust: 100%;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);}
+body{font-family: "Microsoft YaHei",Arial,Helvetica,sans-serif; font-size:12px;  background:#f5f5f5; margin:auto; max-width:640px;}
+*{ margin:0px; padding:0px; -webkit-box-sizing: border-box;}
+html{-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;}
+.clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden;} 
+ul, ol { list-style:none;}
+a{ text-decoration:none; outline:none;}
+em,cite,i{font-style: normal;}
+img{border: 0; max-width: 100%;vertical-align: middle;}
+.left{ float:left;}
+.right{ float:right;}
+.mg10{ margin-top:10px;}
+.none{ display:none;}
+.wbox{display: -webkit-box;}
+.wbox_flex {-webkit-box-flex: 1!important; word-wrap: break-word;word-break: break-all;}
+.wrapper{width:100%;  min-width: 320px; overflow: hidden; margin: 0 auto;}
+.header{ background:#0075de;  width: 100%; margin: 0 auto;
+z-index: 100; height:50px; padding:5px 10px; position: fixed;max-width:640px;}
+.header a{ color:#fff;}
+.header h1{ background:url(../images/bb_logo.png) no-repeat; background-size: 55px; width: 55px; height: 30px; display: inline-block; margin: 5px 0px;}
+.search_bar {border-radius: 5px; position: relative; display: block; margin: 0px 10px;}
+.search_bar div { width: 100%; height: 40px; display: inline-block; }
+.search_bar input { width: 100%; height: 40px; line-height:40px; border: none; resize: none; color: #fff;
+font-size: 16px; outline: 0; text-align: start; float: left; background: #0068c6; border-radius: 5px; padding-left:42px; }
+.search_bar s { position: absolute; background: url(../images/index_search.png) no-repeat; background-size: 30px; left:10px; top: 5px; width: 30px; height: 30px; cursor: pointer; }
+.login_btn a{position: relative; right: 0px; line-height:40px; font-size:16px; display: block;}
+
+
+
+.fixedtop{ min-width: 320px; max-width: 640px; margin:0px auto; position: fixed; top:0px; width: 100%; z-index: 102; height:40px;}
+.fixedheader{ width: 100%; margin: 0 auto; z-index: 100;position:relative;}
+.box-cover{background-color: #ff2064; position: absolute; width: 100%;  height: 40px;  top: 0px; min-width: 320px; max-width: 640px; margin: 0 auto;}
+.header_m{position: relative; width: 100%; height: 40px;  padding: 0 10px; line-height:40px;}
+.header_m h1{ background:url(../images/bb_logo.png) no-repeat; background-size: 55px; width: 55px; height: 30px; display: inline-block; margin: 5px 0px;}
+.fixedsearch_bar { width:100%;border-radius: 5px; display: block; margin-left:65px; padding-right:125px; position:absolute; top:0px;}
+.fixedsearch_bar div { width: 80%; height: 30px; display: inline-block; background:#fff; border-radius: 15px; margin-top:5px; overflow:hidden; }
+.fixedsearch_bar input { width: 80%; height:30px; line-height:30px; border: none; resize: none; color: #666; font-size: 13px; outline: 0; text-align: start; float: left;  border-radius: 5px; padding-left:30px; }
+.fixedsearch_bar .s { position: absolute; background: url(../images/index-search.png) no-repeat; background-size: 28px; top: 5px; width: 30px; height: 30px; cursor: pointer; }
+.fixedlogin_btn{ position:absolute; right:10px; top:0;}
+.fixedlogin_btn a{ font-size:15px; color:#fff;}
+
+
+/*----------底部---------*/
+.bottom{ background:#fff; min-height: 170px;}
+.footer_links{width: 320px;
+margin: 0 auto;
+display: table;
+height: 13px;
+padding: 18px 0;}
+.footer_links li{border-right: 1px solid #d7d7d7;display: table-cell; text-align:center; width: 69px; height: 13px;line-height: 13px; font-size: 13px;}
+.footer_links li a{ color:#333;}
+.line{height: 0px; border-top: 1px solid #f5f5f5; border-width: 1px 0 0 0;}
+.platforms{height: 69px; width: 250px; margin: 0 auto; display: table;}
+.platforms li{display: table-cell; text-align:center; padding:10px 0px;}
+.platforms li a{ color:#999; font-size:14px;}
+.platforms li b{ width:40px; height:40px; display:block; margin:0px auto;}
+.platforms li b.b1{ background:url(../images/bottom_i01.png) no-repeat; background-size:40px;}
+.platforms li b.b2{ background:url(../images/bottom_i02.png) no-repeat; background-size:40px;}
+.platforms li.on b.b1{ background:url(../images/bottom_i1.png) no-repeat; background-size:40px;}
+.platforms li.on a{ color:#333;}
+.copyright{height: 44px; line-height: 44px; text-align: center; color: #848689; font-size: 12px;}
+/*------------悬浮------------*/
+.fixed{ position:fixed; width:100%; bottom:0px;z-index: 22;max-width:640px;}
+.fixed_bg{ width:100%; height:50px; position: relative; border-top:1px #f5f5f5 solid; background-color: #fff; box-shadow: 0 0 5px 0 rgba(155,143,143,0.6);  -webkit-box-shadow: 0 0 5px 0 rgba(155,143,143,0.6);}
+.btns{ position:absolute; top:0px; color:#555; width:100%; display:table;}
+.btns li{ display:table-cell; float:left; text-align:center; width:20%; height:50px;font-size:10px;}
+.btns li a{ display:block; color:#555;}
+.btns li.in01 i,.btns li.in02 i,.btns li.in03 i,.btns li.in04 i,.btns li.in05 i{width:27px; height:27px; display:block; margin:3px auto 0px auto;}
+.btns li.in01 i{ background:url(../images/index_i11.png) no-repeat; background-size:28px; }
+.btns li.in02 i{ background:url(../images/index_i12.png) no-repeat; background-size:28px; }
+.btns li.in03 i{ background:url(../images/index_i13.png) no-repeat; background-size:28px; }
+.btns li.in04 i{ background:url(../images/index_i144.png) no-repeat; background-size:28px; }
+.btns li.in05 i{ background:url(../images/index_i15.png) no-repeat; background-size:28px; }
+.btns li.in01 span,.btns li.in02 span,.btns li.in03 span,.btns li.in04 span,.btns li.in05 span{ line-height:20px;}
+
+/*------------V2------------*/
+
+.fixedtop .user-nav>li .dropdown-menu {
+    left: auto;
+    right: 0;
+}
+
+
+

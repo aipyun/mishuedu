@@ -1,0 +1,11 @@
+services:
+    vip_course_event_subscriber:
+        class: VipPlugin\Biz\Vip\Event\CourseEventSubscriber
+        arguments: ['@biz']
+        tags:
+            - { name: codeages_plugin.event.subscriber }
+    vip_push_message_event_subscriber:
+            class: VipPlugin\Biz\Vip\Event\PushMessageEventSubscriber
+            arguments: ['@biz']
+            tags:
+                - { name: codeages_plugin.event.subscriber }

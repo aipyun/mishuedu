@@ -1,0 +1,17 @@
+<div class="vip-new-member">
+  <div class="container">
+    <div class="text-line gray">
+      <h5><span>最新会员</span><div class="line"></div></h5>
+    </div>
+    <div class="member-list clearfix">
+      {% if members|default(false) and users|default(false) %}
+        {% for member in members %}
+        {% set memberDetail = users[member.userId] %}
+        <a href="{{ path('user_show', {id:memberDetail.id}) }}"><img  class="avatar-md" src="{{ filepath(memberDetail.largeAvatar, 'avatar.png') }}" alt=""></a>
+        {% endfor %}
+      {% else %}
+        <div class="empty">暂无会员记录</div>
+      {% endif %}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+admin_operation_coupon:
+    name: 优惠码管理
+    parent: admin_operation
+    router_name: admin_coupon
+    after: admin_operation_analysis_register
+
+
+admin_operation_coupon_manage:
+    name: 优惠码管理
+    disable: true
+    parent: admin_operation_coupon
+    router_name: admin_coupon
+
+admin_operation_coupon_query:
+    name: 使用查询
+    parent: admin_operation_coupon
+    disable: true
+    router_name: admin_coupon_query
+
+admin_coupon_generate:
+    name: 生成优惠码
+    parent: admin_operation_coupon_manage
+    group: topBtn
+
+admin_coupon_setting:
+    name: 优惠码设置
+    disable: true
+    parent: admin_setting_operation

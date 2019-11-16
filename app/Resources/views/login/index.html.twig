@@ -1,0 +1,117 @@
+{% extends 'layout.html.twig' %}
+{% do script(['libs/jquery-validation.js','app/js/auth/login/index.js']) %}
+{% set bodyClass = 'login' %}
+{% set ai_face_enabled = (setting('feature.face_enabled')|default(0) and setting('face.login.enabled')|default(0) and setting('face.login.pc_enabled')|default(0)) %}
+{% block title %}{{ 'user.login.content_title'|trans }} - {{ parent() }}{% endblock %}
+
+{% block content %}
+  <style>
+    #ban{display: none;}
+  </style>
+  {% if app.request.cookies.get('modalOpened') == 1 %}
+    <a href="#modal" class=" hidden" data-toggle="modal"
+      data-url="{{ path('card_info',{'cardType':app.request.query.get('cardType'),'cardId':app.request.query.get('cardId')}) }}" class="hidden"><span
+        class="receive-modal"></span></a>
+  {% endif %}
+  <div class="es-section login-section">
+    <div class="logon-tab clearfix">
+      <a class="active">{{ 'user.login.login_account'|trans }}</a>
+      <a href="{{ path('register', {goto:_target_path}) }}">{{ 'user.register.register_account'|trans }}</a>
+    </div>
+    <div class="login-main js-login-main fromflag">
+      <form id="login-form" class="form-vertical" method="post" action="{{ path('login_check') }}">
+
+        {% if error %}
+          <div class="alert alert-danger">
+            {% if error.message == 'Bad credentials.' %}
+              {{ 'site.user_password.error_tips'|trans }}
+            {% elseif error.message == 'User account is locked.' %}
+              {{ 'exception.user_lock'|trans }}
+            {% else %}
+              {{ error.message|trans }}
+            {% endif %}
+          </div>
+        {% endif %}
+        {{ web_macro.flash_messages() }}
+        <div class="form-group mbl">
+          <label class="control-label" for="login_username">{{ 'user.login.account_label'|trans }}</label>
+          <div class="controls">
+            <input class="form-control input-lg" id="login_username" type="text" name="_username" value="{% if app.request.query.get('account') %}{{ app.request.query.get('account') }}{% else %}{{ last_username }}{% endif %}" required
+              placeholder='{{ 'user.login.account_placeholder'|trans }}'/>
+            <div class="help-block"></div>
+          </div>
+        </div>
+        <div class="form-group mbl">
+          <label class="control-label" for="login_password">{{ 'user.login.password_label'|trans }}</label>
+          <div class="controls">
+            <input class="form-control input-lg" id="login_password" type="password" name="_password" required placeholder='{{ 'user.login.password_placeholder'|trans }}'/>
+          </div>
+        </div>
+
+        <div class="form-group mbl">
+          <div class="controls">
+            <input type="checkbox" name="_remember_me" checked="checked"> {{ 'user.login.remember_me'|trans }}
+          </div>
+        </div>
+        <div class="form-group mbl">
+          <button type="button" class="btn btn-primary btn-lg btn-block js-btn-login">{{ 'user.login.submit_button'|trans }}</button>
+        </div>
+
+        <input type="hidden" name="_target_path" value="{{ _target_path }}">
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('site') }}">
+      </form>
+
+      <div class="mbl">
+        <a class="link-primary" href="{{ path('password_reset') }}">{{ 'user.login.find_password'|trans }}</a>
+        <span class="color-gray mhs">|</span>
+        <span class="color-gray">{{ 'user.login.ask_register'|trans }}</span>
+        <a class="link-primary" href="{{ path('register', {goto:_target_path}) }}">{{ 'user.login.go_register'|trans }}</a>
+      </div>
+
+      {% if setting('login_bind.enabled') or ai_face_enabled %}
+        <div class="social-login">
+            <span>
+              {% if ai_face_enabled %}
+                <a class="sts-login-link js-sts-login-link" href="javascript:;">
+                  <img src="{{ asset('static-dist/app/img/face.png') }}"
+                    srcset="{{ asset('static-dist/app/img/face.png') }} 1x, {{ asset('static-dist/app/img/face@2x.png') }} 2x" alt="{{'user.login.sts_discovery'|trans}}"/>
+                </a>
+              {% endif %}
+              {{ render(controller('AppBundle:Login:oauth2LoginsBlock', {targetPath:_target_path})) }}
+            </span>
+          <div class="line"></div>
+        </div>
+      {% endif %}
+    </div>
+
+    {% if ai_face_enabled %}
+      {% set type = 'page' %}
+      {% include 'login/sts-logins-block.htm.twig'  with { type: type, goto: _target_path } %}
+    {% endif %}
+  </div>
+
+
+
+  <!-- app二维码入口 开始 -->
+<div class="clearfix hidden-sm hidden-xs">
+  <div class="pt50 pb50" id="toHere">
+    <section class="w1200">
+      <div class="join_wm">加入我们，打开了一扇“智慧精进之门”</div>
+      <div class="long_sm"> 亲爱的朋友，宇宙中没有任何事情是因为偶然来到我们身边的，就如您和成长在线的结缘，人生就是一个不断选择、创造并成为我的过程，您的这个选择就意味着为自己的生命打开了一扇“智慧精进之门”，此刻开始，您的生命中将会有诸多智慧导师和来自全球的精进家人相伴成长，建议您认真填写和完善个人资料，以便于让更多家人了解您，因为这里不仅是学习的平台，更是正能量的精英人脉拓展平台，您的真实和详细资料将会为自己创造无限机会 </div>
+      <div class="tac">
+        <div class="video_dl">
+          <script id="autoJs36811df114" type="text/javascript">var pNode=document.getElementById("autoJs36811df114").parentNode,pt,pb,dWidth = pNode.clientWidth,pHeight = pNode.clientHeight,dHeight = ReCallHeight(pHeight, dWidth,pNode);function ReCallHeight(h, w,a) {try{pt = window.getComputedStyle(a,null).paddingTop;pb = window.getComputedStyle(a,null).paddingBottom;}catch(e){pt = a.currentStyle.paddingTop;pb = a.currentStyle.paddingBottom;}h = h- parseInt(pt)- parseInt(pb);if(h && (typeof h == "number") && h==h && h>0){return h;}else{var ua = navigator.userAgent.toLowerCase();var ipad = ua.match(/(iPad).*OS\s([\d_]+)/),isIphone = !ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/),isAndroid = ua.match(/(Android)\s+([\d.]+)/),isMobile = isIphone || isAndroid;if(isMobile){return w*9/16;}else{return (w*9/16)+36;}}} var letvcloud_player_conf =  {"uu":"3e58f2d148","vu":"36811df114","pu":"6b998c2e3b"};</script>
+
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+  <!-- app二维码入口 结束 -->
+
+
+{% endblock %}
+
+{% block bottom %}
+  {% include 'mobile/footer-tool-bar.html.twig' with { mobile_tool_bar: 'login' } %}
+{% endblock %}

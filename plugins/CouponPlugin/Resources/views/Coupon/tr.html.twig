@@ -1,0 +1,52 @@
+{% import "admin/macro.html.twig" as web_macro %}
+<tr>
+  <td>
+    {{ batch.name }}
+    <div class="short-long-text">
+      <div class="short-text text-sm text-muted">{{ batch.description|plain_text(8) }} <span class="trigger">(展开)</span></div>
+      <div class="long-text">{{ batch.description|raw }} <span class="trigger">(收起)</span></div>
+    </div>
+  </td>
+  <td>
+    {{ batch.prefix }}
+  </td>
+  <td class="text-danger">
+  {% if batch.type=='discount' %}
+    <span>{{ batch.couponContent }}打折{{ batch.rate|number_format(1) }}折</span>
+  {% elseif batch.type=='minus' %}
+    <span>抵价{{ batch.rate }}元</span>
+  {% endif %}   
+  <br>  
+   <span class="text-muted text-sm">{{ batch.couponContent }}</span>
+  </td>
+  <td>{{ batch.usedNum }}/{{ batch.generatedNum-batch.unreceivedNum }}/{{ batch.generatedNum }}</td>  
+  <td>{{ (batch.createdTime )|date('Y-n-d') }}~<br />{{ (batch.deadline )|date('Y-n-d') }}</td>
+  <td class="text-danger">{{ batch.money }}</td>
+  <td>
+    {% if batch.linkEnable|default(0) %}通过链接<br />{% endif %}
+    {% if batch.codeEnable|default(0) %}通过优惠码<br />{% endif %}
+    {% if batch.h5MpsEnable|default(0) %}通过商品详情页:<br />小程序/新版微网校<br />{% endif %}
+  </td>
+  <td>
+    <div class="btn-group">
+      <a class="btn btn-default btn-sm" href="#modal" data-toggle="modal" data-url="{{ path('admin_coupon_show', {batchId:batch.id}) }}">详情</a>
+      <a href="#" type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+        <span class="caret"></span>
+      </a>
+      <ul class="dropdown-menu" role="menu">
+        {% if batch.codeEnable %}
+          <li><a href="{{ path('admin_coupon_batch_export', {batchId:batch.id}) }}" >导出CSV文件</a></li>
+        {% endif %}
+        {% if batch.token and batch.linkEnable %}
+          <li><a href="#modal" data-toggle="modal" data-url="{{ path('admin_coupon_get_receive_url', {batchId:batch.id}) }}" >获取发放地址</a></li>
+        {% endif %}
+        {% if batch.codeEnable or batch.linkEnable %}
+          <li class="divider"></li>
+        {% endif %}
+        
+        
+        <li> <a class="coupon-remove" href="javascript:;" data-url="{{ path('admin_coupon_delete', {id:batch.id}) }}">删除</a></li>
+      </ul>
+    </div>
+  </td>
+</tr>

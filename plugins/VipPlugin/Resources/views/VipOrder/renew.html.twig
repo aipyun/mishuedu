@@ -1,0 +1,43 @@
+{% extends 'layout.html.twig' %}
+{% block title %}{{ 'vip.renew.title'|trans }} -
+	{{ parent() }}{% endblock %}
+  
+{% do script(['libs/jquery-validation.js', 'vipplugin/js/order/buy/index.js']) %}
+{% set type = 'renew' %}
+{% block content %}
+	<div class="es-row-wrap container-gap" style="min-height:500px;">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="page-header">
+					<h1>{{ 'vip.renew.title'|trans }}</h1>
+				</div>
+			</div>
+		</div>
+		<form class="form-horizontal" id="member-buy-form" data-try-buy-url="{{ path('vip_try_buy') }}" action="{{ path('order_show') }}">
+			<input type="hidden" name="targetType" value="vip"/>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">{{ 'vip.buy.form.current' | trans }}</label>
+				<div class="col-sm-8 form-control-static">
+					<input type="hidden" name="targetId" value="{{ member.levelId }}">
+					<strong class="text-info level-name">{{ level.name }}</strong>
+					{% if member.deadline > nowTime %}
+						<span class="text-muted">，{{ 'vip.expired_end_time' | trans({'%deadlineTime%': member.deadline|date('Y-m-d'), '%lastDeadline%': member.deadline|remain_time})|raw }} </span>
+					{% else %}
+						<span class="text-muted">，{{ 'vip.expired' | trans }}</span>
+					{% endif %}
+				</div>
+			</div>
+			{% include "VipPlugin:VipOrder:buy-form-common.html.twig" %}
+			<div class="form-group">
+				<div class="col-sm-offset-3 col-sm-8">
+					<button type="button" class="btn btn-primary btn-buy-vip">{{ 'vip.renew.confirm_btn' | trans }}</button>
+				</div>
+			</div>
+			{% if member.deadline > nowTime %}
+				<input type="hidden" name="startDate" value="{{ member.deadline|date('Y-m-d') }}">
+			{% else %}
+				<input type="hidden" name="startDate" value="{{ nowTime|date('Y-m-d') }}">
+			{% endif %}
+		</form>
+	</div>
+{% endblock %}

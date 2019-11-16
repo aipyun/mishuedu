@@ -1,0 +1,99 @@
+admin_vip_create:
+    pattern: /vip/create
+    defaults: { _controller: VipPlugin:VipAdmin:create }
+
+admin_vip_export:
+    pattern: /vip/export
+    defaults: { _controller: VipPlugin:VipAdmin:export }
+
+admin_vip_order:
+    pattern: /vip/order
+    defaults: { _controller: VipPlugin:VipAdmin:order }
+
+admin_vip_setting:
+    pattern: /setting/vip
+    defaults: { _controller: VipPlugin:VipAdmin:setting }
+
+admin_vip_setting_poster_upload:
+    pattern: /setting/vip/poster/upload
+    defaults: { _controller: VipPlugin:VipAdmin:PosterUpload }
+    methods: [POST]
+
+admin_vip_setting_poster_remove:
+    pattern: /setting/vip/poster/remove
+    defaults: { _controller: VipPlugin:VipAdmin:posterRemove }
+    methods: [POST]
+
+admin_vip_cancel:
+    pattern: /vip/users/cancel
+    defaults: { _controller: VipPlugin:VipAdmin:cancel }
+    methods: [POST]
+
+admin_vip_list:
+    pattern: /vip/list/{type}
+    defaults: { _controller: VipPlugin:VipAdmin:index, type: 'all' }
+
+admin_vip_update:
+    pattern: /vip/update
+    defaults: { _controller: VipPlugin:VipAdmin:update }
+
+admin_vip_bought_history:
+    pattern: /vip/bought/history
+    defaults: { _controller: VipPlugin:VipAdmin:boughtHistory}
+
+admin_vip_bought_list:
+    pattern: /vip/bought/list
+    defaults: { _controller: VipPlugin:VipAdmin:boughtList}
+
+#admin_vip_edit:
+#    pattern: /setting/vip/user/{userId}/edit
+#    defaults: { _controller: VipPlugin:VipAdmin:edit}
+
+admin_vip_edit:
+    pattern: /setting/vip/users/edit
+    defaults: { _controller: VipPlugin:VipAdmin:edit}
+
+admin_vip_edit_save:
+    pattern: /setting/vip/users/edit/save
+    defaults: { _controller: VipPlugin:VipAdmin:editSave}
+
+admin_vip_create_nickname_check:
+    pattern:  /vip/create/nickname/check
+    defaults: { _controller: VipPlugin:VipAdmin:nicknameCheck }
+
+admin_vip_level:
+    pattern: /setting/vip/level
+    defaults: { _controller: VipPlugin:VipLevelAdmin:index }
+
+admin_vip_level_create:
+    pattern: /setting/vip/level/create
+    defaults: { _controller: VipPlugin:VipLevelAdmin:create }
+
+admin_vip_level_update:
+    pattern: /setting/vip/level/{id}/update
+    defaults: { _controller: VipPlugin:VipLevelAdmin:update }
+
+admin_vip_level_delete:
+    pattern: /setting/vip/level/{id}/delete
+    defaults: { _controller: VipPlugin:VipLevelAdmin:delete }
+    methods: [POST]
+ 
+admin_vip_level_sort:
+    pattern: /setting/vip/level/sort
+    defaults: { _controller: VipPlugin:VipLevelAdmin:sort }
+
+admin_vip_level_icon:
+    pattern: /setting/vip/level/icon
+    defaults: { _controller: VipPlugin:VipLevelAdmin:icon }
+
+admin_vip_level_on:
+    pattern: /setting/vip/level/{id}/on
+    defaults: { _controller: VipPlugin:VipLevelAdmin:on }
+
+admin_vip_level_off:
+    pattern: /setting/vip/level/{id}/off
+    defaults: { _controller: VipPlugin:VipLevelAdmin:off }
+
+admin_vip_level_chooser:
+    pattern: /vip/level/chooser
+    defaults: { _controller: VipPlugin:VipLevelAdmin:chooser }

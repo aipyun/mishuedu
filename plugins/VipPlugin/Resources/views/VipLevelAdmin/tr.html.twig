@@ -1,0 +1,35 @@
+<tr id="{{ memberlevel.id }}" class="item-memberlevel">
+  <td>
+    <span class="glyphicon glyphicon-move" style="cursor:move"></span>
+  </td>
+  <td width="30%">
+    <img width="30px" style="border-radius: 50%;" src="{{ memberlevel.icon }}"> {{ memberlevel.name}}
+  </td>
+  <td>
+    {% if memberlevel.monthPrice == 0 %}未设置{% else %}{{ memberlevel.monthPrice }}{% endif %}
+  </td>
+  <td>
+    {% if memberlevel.yearPrice == 0 %}未设置{% else %}{{ memberlevel.yearPrice }}{% endif %}
+  </td>
+  <td>
+    {{ memberlevel.memberNum|default(0) }}
+  </td>
+  <td>
+    {% if memberlevel.enabled %}
+      <span class="text-success">允许</span>
+      <br>
+    {% else %}
+      <span class="text-muted">禁止</span>
+    {% endif %}  
+  </td>
+  <td>
+    <div class="btn-group">
+      {% if has_permission('admin_vip_level_update') %}
+        <a class="btn btn-default btn-sm" href="{{path('admin_vip_level_update',{id:memberlevel.id}) }}">编辑</a>
+      {% endif %}
+
+      {% include 'admin/role/templates/group-button.html.twig' with {parentCode: 'admin_vip_level', group:'groupButton', memberlevel: memberlevel} %}
+      
+    </div> 
+  </td>
+</tr>

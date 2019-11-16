@@ -1,0 +1,91 @@
+_admin_vip_list:
+    name: 会员管理
+    parent: admin_user
+    after: admin_message_manage
+    children:
+        admin_vip_list:
+            name: 会员管理
+            disable: true
+            children:
+                admin_vip_create:
+                    name: '添加新会员'
+                    mode: modal
+                    group: topBtn
+                admin_vip_import:
+                    name: '批量添加新会员'
+                    router_name: importer_index
+                    router_params:
+                        type: vip
+                    group: topBtn
+                    mode: modal
+                admin_vip_edit:
+                    name: '编辑会员'
+                    mode: modal
+                    router_params:
+                        userId: (member.userId)
+                    group: none
+                admin_vip_cancel:
+                    name: '取消会员'
+                    mode: none
+                    class: delete-member
+                    router_params:
+                        userId: (member.userId)
+                    group: none
+                admin_vip_export:
+                    name: '会员导出'
+                    group: none
+        admin_vip_bought_list:
+            name: 操作记录
+            disable: true
+_admin_vip_order:
+    name: 会员订单
+    parent: admin_order
+    children:
+        admin_vip_order:
+            name: 会员订单
+            disable: true
+_admin_vip_setting:
+    name: 会员设置
+    parent: admin_setting_user
+    disable: true
+    mode: capsules
+    children:
+        admin_vip_setting:
+            name: 会员设置
+            group: capsule
+        admin_vip_level:
+            name: 会员等级设置
+            group: capsule
+            children:
+                admin_vip_level_create:
+                    name: '添加新会员等级'
+                    group: topBtn
+                admin_vip_level_update:
+                    name: '编辑新会员等级'
+                    group: button
+                admin_vip_level_on:
+                    name: '开启加入会员'
+                    group: groupButton
+                    visable: (not memberlevel.enabled)
+                    icon: 'glyphicon glyphicon-ok-circle'
+                    mode: none
+                    class: on-memberlevel
+                    router_params:
+                        id: (memberlevel.id)
+                admin_vip_level_off:
+                    name: '关闭加入会员'
+                    group: groupButton
+                    visable: (memberlevel.enabled)
+                    icon: 'glyphicon glyphicon-ban-circle'
+                    mode: none
+                    class: off-memberlevel
+                    router_params:
+                        id: (memberlevel.id)
+                admin_vip_level_delete:
+                    name: '删除会员等级'
+                    group: groupButton
+                    icon: 'glyphicon glyphicon-trash'
+                    mode: none
+                    class: delete-memberlevel
+                    router_params:
+                        id: (memberlevel.id)

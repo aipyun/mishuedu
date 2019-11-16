@@ -1,0 +1,66 @@
+{% extends 'old-bootstrap-modal-layout.html.twig' %}
+{% set memberlevel = memberlevel|default(null) %}
+{% set modalSize = 'large' %}
+{% block title %}
+设置图标
+{% endblock %}
+
+{% block body %}
+<div id="system-icon">
+  <div class="bs-example bs-example-tabs">
+    <ul id="myTab" class="nav nav-tabs">
+      <li class="active"><a href="#system" data-toggle="tab">系统内置</a></li>
+      <li class=""><a href="#user-defined" data-toggle="tab">自定义</a></li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+      <div class="tab-pane fade active in" id="system">
+        <p class="help-block mvl">系统默认图标列表</p>
+        <div class="radio-inline">
+          <label>
+            <input type="radio" name="system-icon" id="system-icon1" value="{{ asset('assets/v2/img/vip/vip_icon_diamond.png') }}" checked="checked">
+            <img src="{{ asset('assets/v2/img/vip/vip_icon_diamond.png') }}" class="img-responsive" width="35"/>
+          </label>
+        </div>
+        <div class="radio-inline">
+          <label>
+            <input type="radio" name="system-icon" id="system-icon2" value="{{ asset('assets/v2/img/vip/vip_icon_gold.png') }}">
+            <img src="{{ asset('assets/v2/img/vip/vip_icon_gold.png') }}" class="img-responsive" width="35"/>
+          </label>
+        </div>
+        <div class="radio-inline">
+          <label>
+            <input type="radio" name="system-icon" id="system-icon3" value="{{ asset('assets/v2/img/vip/vip_icon_silver.png') }}">
+            <img src="{{ asset('assets/v2/img/vip/vip_icon_silver.png') }}" class="img-responsive" width="35"/>
+          </label>
+        </div>
+        <div class="radio-inline">
+          <label>
+            <input type="radio" name="system-icon" id="system-icon4" value="{{ asset('assets/v2/img/vip/vip_icon_bronze.png') }}">
+            <img src="{{ asset('assets/v2/img/vip/vip_icon_bronze.png') }}" class="img-responsive"  width="35"/>
+          </label>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="user-defined">
+        <form class="mtl">
+          <input type="hidden" name="uploadIcon">
+          <div id="iconContent"></div>
+        </form>
+        <p class="help-block mvl">请上传jpg, gif, png格式的图片，建议图片尺寸为 136×136px</p>
+        <form id="icon-upload-form" action="{{ path('file_upload', {group:'default'}) }}" method="post" enctype="multipart/form-data">
+          <input class="btn btn-default btn-sm" type="file" name="file" value="上传" style="display:inline-block;" accept="image/ico" id="icon-upload-input">
+          <button class="btn btn-default btn-sm">上传图标</button>
+          <input type="hidden" name="token" value="{{ upload_token('default', 'image') }}" />
+          <input type="hidden" name="_csrf_token" value="{{ csrf_token('site') }}">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+  <button type="submit" class="btn btn-primary pull-right" id="upload-icon-btn">确定</button>
+  <button type="button" class="btn btn-link pull-right" data-dismiss="modal">取消</button>
+  <script>app.load('vipplugin/controller/vipleveladmin/icon')</script>
+{% endblock %}
+  

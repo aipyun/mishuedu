@@ -1,0 +1,42 @@
+log.action.vip.create_level: Create a vip level
+log.action.vip.update_level: Upgrade a vip level
+log.action.vip.on_level: Open vip
+log.action.vip.off_level: Close vip
+log.action.vip.delete_level: Delete vip level
+log.action.vip.create_member: New vip
+log.action.vip.renew_member: Renew vip
+log.action.vip.upgrade_member: Upgrade vip
+log.action.vip.update_member: Update vip
+log.action.vip.delete_member: Delete Vip
+
+vip.buy.title: Buy vip
+vip.buy.confirm_btn: Confirm vip
+vip.buy.level: Vip level
+vip.buy.form.current: Your current vip level is
+vip.buy.from.open_time: Opening time
+vip.buy.not_open_level_admin_tips: >
+  <h5>The system has not yet set up a membership level. Please go to the management background to set up the membership level first.<a href="%vipLevelUrl%" class="alert-link">，goto set</a></h5>
+vip.buy.not_open_level_tips: >
+  <h5>The membership level is not yet open, please wait patiently for the online school to open</h5>
+vip.buy.month: Month
+vip.buy.year: Year
+vip.buy.radios.month: By month
+vip.buy.radios.year: By year
+vip.buy.deadline_time_tips: >
+  Valid until <strong class="deadline"></strong>
+
+vip.renew.title: Vip renew
+vip.renew.confirm_btn: Renew confirm 
+vip.renew.deadline_time_tips: >
+  Extended period of validity to <strong class="deadline"></strong>
+
+vip.upgrade.title: Upgrade vip
+vip.upgrade.confirm_btn: Confirm vip
+vip.upgrade.can_upgrade_to: You can upgrade to
+vip.upgrade.tenewals_tips: >
+  The remaining days of the membership are less than %deadlineTime% days. Please renew it before you upgrade.
+
+vip.expired: Vip has expired
+vip.expired_end_time: >
+  Deadline time is %deadlineTime%
+  (over %lastDeadline%)

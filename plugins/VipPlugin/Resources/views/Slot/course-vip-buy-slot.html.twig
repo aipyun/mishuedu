@@ -1,0 +1,5 @@
+{% if course.vipLevelId > 0 and vipMember|default(null) and userVipStatus == 'ok' %}
+  {{ '会员免费学'|trans }}
+{% endif %}
+
+

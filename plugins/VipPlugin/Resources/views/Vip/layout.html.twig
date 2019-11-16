@@ -1,0 +1,28 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}会员专区 - {{ parent() }}{% endblock %}
+
+{% set bodyClass="bg-blank" %}
+{% set config = current_theme() %}
+
+{% block stylesheets %}
+  {{ parent() }}
+
+  {% if isEditColor|default(0) %}
+    {% set maincolor = config.config.maincolor|default('default') %}
+  {% else %}
+    {% set maincolor = config.confirmConfig.maincolor|default('default') %}
+  {% endif %}
+
+  <link href="{{ asset('static-dist/vipplugin/css/main.css') }}" rel="stylesheet"/>
+
+  {% if maincolor != 'default' %}
+    <link href="{{ asset('static-dist/vipplugin/css/main-' ~ maincolor ~ '.css') }}" rel="stylesheet" />
+  {% endif %}
+
+{% endblock %}
+
+{% block full_content %}
+  {% include 'common/consult-supplier.html.twig' %}
+  {% block vip_main %}{% endblock %}
+{% endblock %}

@@ -1,0 +1,52 @@
+vip:
+    path: /vip/
+    defaults: { _controller: VipPlugin:Vip:index, levelId: 0}
+
+vip_course_explore:
+    path: /vip/course/level/{levelId}
+    defaults: { _controller: VipPlugin:Vip:course, levelId: 0 }
+
+vip_history:
+    path: /my/vip/history
+    defaults: { _controller: VipPlugin:Vip:history }
+
+vip_try_buy:
+    path: /vip/tryBuy
+    defaults: { _controller: VipPlugin:VipOrder:tryBuy }
+    methods: [POST]
+
+vip_buy:
+    path: /vip/buy
+    defaults: { _controller: VipPlugin:VipOrder:buy }
+
+vip_renew:
+    path: /vip/renew
+    defaults: { _controller: VipPlugin:VipOrder:renew }
+
+vip_upgrade:
+    path: /vip/upgrade
+    defaults: { _controller: VipPlugin:VipOrder:upgrade }
+
+vip_upgrade_amount:
+    path: /vip/upgrade/amount
+    defaults: { _controller: VipPlugin:VipOrder:upgradeAmount }
+
+vip_courses:
+    path: /vip/{levelId}/courses
+    defaults: { _controller: VipPlugin:Vip:vipCourses }
+
+vip_classrooms:
+    path: /vip/{levelId}/classrooms
+    defaults: { _controller: VipPlugin:Vip:vipClassrooms }
+
+vip_course_join:
+    path: /vip/course/{courseId}/join
+    defaults: { _controller: VipPlugin:VipJoin:joinCourse }
+
+vip_classroom_join:
+    path: /vip/classroom/{classroomId}/join
+    defaults: { _controller: VipPlugin:VipJoin:joinClassroom }
+
+join_course_by_vip_modal:
+    path: /vip/join/course/{courseId}/approve
+    defaults: { _controller: VipPlugin:VipJoin:joinNeedApprove }

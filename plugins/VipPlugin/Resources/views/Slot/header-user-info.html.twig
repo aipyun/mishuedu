@@ -1,0 +1,3 @@
+{% if setting('vip.enabled') %}
+  <div class="user-dropdown-profile__rank cd-mv8">{% if level.name|default() %}{{ level.name|sub_text(17) }}{% else %}{{ '普通学员'|trans }}{% endif %}</div>
+{% endif %}

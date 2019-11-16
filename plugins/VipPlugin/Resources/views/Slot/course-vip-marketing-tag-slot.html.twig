@@ -1,0 +1,8 @@
+{% if setting('vip.enabled')  and course.vipLevelId > 0 %}
+  {% set vipLevel = data('VipLevel', {id: course.vipLevelId }) %}
+  <span class="text-12 mr5 color-warning">
+    {{ vipLevel.name }}免费
+  </span>
+{% endif %}
+
+

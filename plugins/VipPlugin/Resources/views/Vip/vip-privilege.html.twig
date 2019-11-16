@@ -1,0 +1,22 @@
+<div class="vip-filer">
+  <div class="container">
+    <div class="text-line">
+      <h5><span>会员特权</span><div class="line"></div></h5>
+    </div>
+    <div class="vip-cat">
+      <ul class="nav nav-pills hidden-xs" role="tablist">
+      {% if levels|default(null) %}
+        {% for level in levels %}
+          <li {% if loop.index == 1 %}class="active" {% endif %}><a href="javascript:;" data-course-url="{{path('vip_courses',{levelId:level.id})}}"  data-classroom-url="{{path('vip_classrooms',{levelId:level.id})}}">{{level.name}}</a></li>
+        {% endfor %}
+      {% endif %}
+      </ul>
+    </div>
+    <div class="vip-show">
+    {% if levelId|default(null) %}
+      {{ render(controller('VipPlugin:Vip:vipCourses',{levelId: levelId|default(0)})) }}
+      {{ render(controller('VipPlugin:Vip:vipClassrooms',{levelId: levelId|default(0)})) }}
+    {% endif %}
+    </div>
+  </div>
+</div>

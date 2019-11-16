@@ -1,0 +1,96 @@
+{% extends 'layout.html.twig' %}
+{% block title %}{{ 'vip.upgrade.title' | trans }} -
+	{{ parent() }}{% endblock %}
+
+{% do script(['vipplugin/js/order/upgrade/index.js']) %}
+{% set type = 'upgrade' %}
+{% block content %}
+	<div class="es-row-wrap container-gap" style="min-height:500px;">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="page-header">
+					<h1>{{ 'vip.upgrade.title' | trans }}</h1>
+				</div>
+			</div>
+		</div>
+		{% if canUpgradeMember %}
+			<form class="form-horizontal" id="member-upgrade-form" data-try-buy-url="{{ path('vip_try_buy') }}" action="{{ path('order_show') }}">
+				<input type="hidden" name="targetType" value="vip"/>
+				<input type="hidden" name="buyType" value="upgrade"/>
+				<input type="hidden" name="num" value="{{ member.boughtDuration }}"/>
+				<input type="hidden" name="unit" value="{{ member.boughtUnit }}"/>
+				<div class="form-group">
+					<label class="col-sm-3 control-label">{{ 'vip.buy.form.current' | trans }}</label>
+					<div class="col-sm-8 form-control-static">
+						<strong class="text-primary level-name">{{ level.name }}</strong>
+						{% if setting('coin.coin_enabled') and setting('coin.price_type') == 'Coin'%}
+							{% if member.boughtUnit == 'month' %}
+								<span class="text-primary">({{ set_price((level.monthPrice) * (cashRate)) }}{{setting('coin.coin_name')}}/月 )</span>
+							{% else %}
+								<span class="text-primary">({{ set_price((level.yearPrice) * (cashRate))  }}{{setting('coin.coin_name')}}元/年 )</span>
+							{% endif %}
+						{% else %}
+							{% if member.boughtUnit == 'month' %}
+								<span class="text-primary">(
+									{{ level.monthPrice }}元/月 )</span>
+							{% else %}
+								<span class="text-primary">(
+									{{ level.yearPrice }}元/年 )</span>
+							{% endif %}
+						{% endif %}
+						<span class="text-muted">，{{'vip.expired_end_time' | trans({'%deadlineTime%': member.deadline|date('Y-m-d'), '%lastDeadline%': member.deadline|remain_time('day')})|raw }} </span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label">{{ 'vip.upgrade.can_upgrade_to' | trans }}</label>
+					<div class="col-sm-8 radios">
+						{% for l in levels %}
+							<label>
+								<input
+									type="radio"
+									name="targetId"
+									value="{{ l.id }}"
+									data-name="{{ l.name }}"
+									{% if app.request.query.get('targetId') %}
+									{% if app.request.query.get('targetId') == l.id %}
+									checked="checked"
+									{% endif %}
+									{% elseif loop.index == 1 %}
+									checked="checked"
+									{% endif %}>
+								{{ l.name }}
+								{% if setting('coin.coin_enabled') and setting('coin.price_type') == 'Coin'%}
+									{% if member.boughtUnit == 'month' %}
+										<span class="text-primary">({{ set_price((l.monthPrice) * (cashRate))}}{{setting('coin.coin_name')}}元/月)</span>
+									{% else %}
+										<span class="text-primary">({{ set_price((l.yearPrice) * (cashRate)) }}{{setting('coin.coin_name')}}元/年)</span>
+									{% endif %}
+								{% else %}
+									{% if member.boughtUnit == 'month' %}
+										<span class="text-primary">({{ l.monthPrice }}
+											元/月)</span>
+									{% else %}
+										<span class="text-primary">({{ l.yearPrice }}
+											元/年)</span>
+									{% endif %}
+								{% endif %}
+							</label>
+						{% endfor %}
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-3 col-sm-8">
+						<button type="button" class="btn btn-primary btn-buy-vip">{{ 'vip.upgrade.confirm_btn' | trans }}</button>
+					</div>
+				</div>
+			</form>
+
+		{% else %}
+			<div class="col-sm-12">
+				<div class="alert alert-danger text-center">
+          {{ 'vip.upgrade.tenewals_tips' | trans({'%deadlineTime%': setting('vip.upgrade_min_day')}) | raw }}
+        </div>
+			</div>
+		{% endif %}
+	</div>
+{% endblock %}

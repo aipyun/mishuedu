@@ -1,0 +1,9 @@
+{% if userVipStatus != 'ok' and  setting('vip.enabled') %}
+  {% if vipMember|default(null) and userVipStatus == 'level_low' %}
+    <span class="cd-btn cd-btn-default mr10 btn-vip" data-trigger="hover" data-toggle="popover" data-container=".btn-vip" data-placement="top"
+      data-content="你还不是{{ vipLevel.name }}，<a class='color-primary' href='{{ path('vip_upgrade') }}' target='_blank'>升级会员</a>">会员免费学</span>
+  {% else %}
+    <span class="cd-btn cd-btn-default mr10 btn-vip" data-trigger="hover" data-toggle="popover" data-container=".btn-vip" data-placement="top"
+      data-content="你还不是{{ vipLevel.name }}，<a class='color-primary' href='{{ path('vip_buy') }}' target='_blank'>购买会员</a>">会员免费学</span>
+  {% endif %}
+{% endif %}

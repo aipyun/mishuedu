@@ -1,0 +1,3 @@
+{% if member|default(false) and member.deadline > timestamp() and setting('vip.enabled') %}
+  <img class="user-dropdown-profile__vip-icon" src="{{ level.icon|default(asset('assets/v2/img/vip/vip_icon_bronze.png')) }}" />
+{% endif %}

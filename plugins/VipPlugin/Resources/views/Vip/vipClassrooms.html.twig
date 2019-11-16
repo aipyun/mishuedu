@@ -1,0 +1,16 @@
+{% do script(['vipplugin/js/vip-classroom/index.js']) %}
+{% if classrooms %}
+  <div class="es-piece piece-lg">
+    <div class="piece-header">
+      会员{{ setting('classroom.name')|default('班级') }}
+      <a class="more" href="{{ path('classroom_explore', {filter: {price: 'all',currentLevelId: levelId},orderBy: 'createdTime'}) }}">更多</a>
+    </div>
+    <div class="recommend-class-list row">
+      {% for classroom in classrooms %}
+        <div class="col-md-3 col-sm-6">
+           {% include 'classroom/class-grid.html.twig' %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}

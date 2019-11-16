@@ -1,0 +1,123 @@
+{% extends 'VipPlugin::layout.html.twig' %}
+
+{% set menu = '_admin_vip_setting' %}
+{% set capsule = 'admin_vip_setting' %}
+
+{% set script_controller = 'vipplugin/controller/vipadmin/setting' %}
+
+{% block main %}
+
+{{ web_macro.flash_messages() }}
+
+<form class="form-horizontal" method="post" id="member-zone-form" novalidate>
+  <div class="row form-group">
+    <div class="col-md-2 control-label">
+      <label >专区状态</label>
+    </div>
+    <div class="controls col-md-7 radios">
+      {{ radios('enabled', {1:'开启', 0:'关闭'}, vipSetting.enabled|default(1)) }}
+    </div>
+  </div>
+
+  <div class="row form-group">
+    <div class="col-md-2 control-label">
+      <label >购买方式</label>
+    </div>
+    <div class="controls col-md-7 radios">
+      {{ radios('buyType', {10:'按年月', 20:'按年', 30:'按月'}, vipSetting.buyType|default(10)) }}     
+    </div>
+
+    <div class="controls col-md-7 mtl 10 buy-help"{% if vipSetting.buyType|default(10) == "10" %}{% else %}style="display:none;"{% endif %}>
+      <div class="well">
+        <label for="default_buy_months10">默认购买月数</label>
+        <input type="text" id="default_buy_months10" name="default_buy_months10" required="required"  class="form-control width-input width-input-mini" value="{{ vipSetting.default_buy_months10|default(3) }}">个月
+        <label for="default_buy_years10">默认购买年数</label>
+        <input type="text" id="default_buy_years10" name="default_buy_years10" required="required"  class="form-control width-input width-input-mini" value="{{ vipSetting.default_buy_years10|default(1) }}">年
+      </div>
+    </div>
+
+    <div class="controls col-md-7 mtl 20 buy-help"{% if vipSetting.buyType|default(10) == "20" %}{% else %}style="display:none;"{% endif %}>
+      <div class="well">
+        <label for="default_buy_years">默认购买</label>
+        <input type="text" id="default_buy_years" name="default_buy_years" required="required"  class="form-control width-input width-input-mini" value="{{ vipSetting.default_buy_years|default(1) }}">年
+      </div>
+    </div>
+
+    <div class="controls col-md-7 mtl 30 buy-help"{% if vipSetting.buyType|default(10) == "30" %}{% else %}style="display:none;"{% endif %}>
+      <div class="well">
+        <label for="default_buy_months">默认购买</label>
+        <input type="text" id="default_buy_months" name="default_buy_months" required="required"  class="form-control width-input width-input-mini" value="{{ vipSetting.default_buy_months|default(3) }}">个月
+      </div>
+    </div>
+  </div>
+   <div class="row form-group">
+      <label  class="col-md-2 control-label" for="upgrade_min_day">会员升级限制</label>
+      <div class="controls col-md-5">
+        过期日期前的 <input type="text" id="upgrade_min_day" name="upgrade_min_day" required="required" class="form-control width-input width-input-mini" value="{{ vipSetting.upgrade_min_day|default(30) }}" data-widget-cid="widget-3"> 天内无法升级，只能先续费再升级
+      </div>
+    </div>
+
+  <div class="row form-group">
+    <div class="col-md-2 control-label">
+      <label >会员到期提醒</label>
+    </div>
+    <div class="controls col-md-7 radios">
+      {{ radios('deadlineNotify', {1:'开启', 0:'关闭'}, vipSetting.deadlineNotify|default(0)) }}
+    </div>
+  </div>
+  <div id="beforeNotificationDay" class="row form-group"
+  {% if vipSetting.deadlineNotify == 0 %}
+  style="display:none"
+  {% endif %}
+  >
+    <div class="col-md-2 control-label">
+      <label style="display:none" for="days_of_notify_before_deadline">到期日期前的提醒天数</label>
+    </div>
+    <div class="controls col-md-7 radios">
+      过期日期前的 <input type="text" id="days_of_notify_before_deadline" name="daysOfNotifyBeforeDeadline" required="required" class="form-control width-input width-input-mini" 
+      {% if vipSetting.daysOfNotifyBeforeDeadline|default(0)|number_format == 0 %}
+      value="10"
+      {% else %}
+      value="{{ vipSetting.daysOfNotifyBeforeDeadline|default(10) }}"
+      {% endif %}
+      data-widget-cid="widget-3">天系统自动提醒
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-md-2 control-label">
+      <label for="poster">海报上传</label>
+    </div>
+    <div class="col-md-8 controls">
+      <div id="site-poster-container">{% if vipSetting.poster|default(null) %}<img class="img-responsive mbm" src="{{ asset(vipSetting.poster) }}">{% endif %}</div>
+      <a class="btn btn-default" id="site-poster-upload" 
+      data-upload-token="{{ upload_token('system', 'image') }}"
+      data-goto-url="{{ path('admin_vip_setting_poster_upload') }}">上传</a>
+      <button class="btn btn-default" id="site-poster-remove" type="button" data-url="{{ path('admin_vip_setting_poster_remove') }}" {% if not vipSetting.poster|default(null) %}style="display:none;"{% endif %}>删除</button>
+      <p class="help-block">请上传jpg, gif, png格式的图片。建议图片尺寸为 870×350px。</p>
+      <input type="hidden" name="poster" value="{{ vipSetting.poster|default(null) }}">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label">
+      背景色填充
+    </label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control colorpicker-input width-input-small"
+        name="poster_bgcolor" id="poster-bgcolor"
+        placeholder="{{ vipSetting.poster_bgcolor|default('#d3293c') }}" value="{{ vipSetting.poster_bgcolor|default('#d3293c') }}">
+    </div>
+  </div>
+
+  <div class="row form-group">
+    <div class="col-md-2 control-label"></div>
+    <div class="controls col-md-8">
+      <button type="submit" class="btn btn-primary">提交</button>  
+    </div>
+  </div>
+
+  <input type="hidden" name="_csrf_token" value="{{ csrf_token('site') }}">
+</form>
+
+{% endblock %}

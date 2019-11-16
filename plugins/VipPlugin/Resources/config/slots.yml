@@ -1,0 +1,46 @@
+- name: course.marketing.setting
+  class: VipPlugin\Slot\CourseMarketingSettingSlot
+  priority: 256
+
+- name: course.marketing.extension
+  class: VipPlugin\Slot\CourseMarketingExtensionSlot
+  priority: 256
+
+- name: classroom.marketing.setting
+  class: VipPlugin\Slot\ClassroomMarketingSettingSlot
+  priority: 256
+
+# 课程购买按钮重写
+- name: course.buy-btn.extension
+  class: VipPlugin\Slot\CourseBuyBtnExtensionSlot
+  priority: 256
+
+# 课程购买扩展按钮
+- name: course.purchase.extension
+  class: VipPlugin\Slot\CoursePurchaseExtensionSlot
+  priority: 256
+
+# 教学计划到期提示文案
+- name: course.expired.message
+  class: VipPlugin\Slot\CourseExpiredMessageSlot
+  priority: 256
+
+# 我的账户中心，左侧列表
+- name: my.account.menu.extension
+  class: VipPlugin\Slot\MyAccountMenuSlot
+  priority: 256
+
+# 顶部导航栏，用户标志
+- name: header.user.logo
+  class: VipPlugin\Slot\HeaderUserLogoSlot
+  priority: 256
+
+# 顶部导航栏，用户会员说明
+- name: header.user.info
+  class: VipPlugin\Slot\HeaderUserInfoSlot
+  priority: 256
+
+# 搜索页vip课程tab按钮
+- name: local.search.vip.courses
+  class: VipPlugin\Slot\CourseSearchBtnSlot
+  priority: 256

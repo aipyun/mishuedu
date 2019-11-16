@@ -1,0 +1,10 @@
+coupon:
+    generate_coupon:
+        templateParam:
+            %prefix%: prefix
+            %id%: id
+
+    delete_batch:
+        templateParam:
+            %prefix%: prefix
+            %id%: id

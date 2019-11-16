@@ -1,0 +1,4 @@
+coupon_receive:
+    pattern: /coupon/{token}/receive
+    defaults: { _controller: CouponPlugin:CouponBatch:couponReceive }
+    h5: true

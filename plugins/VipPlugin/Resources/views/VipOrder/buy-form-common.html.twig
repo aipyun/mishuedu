@@ -1,0 +1,50 @@
+<div class="form-group">
+  <label class="col-sm-3 control-label" for="duration">{{ 'vip.buy.from.open_time' | trans }}</label>
+  <div class="col-sm-8 radios">
+    {% set buyType = buyType|default(10) %} 
+    {% if buyType == 10 %}
+    {{ radios('unit', {month: ("vip.buy.radios.month"|trans), year: ("vip.buy.radios.year"|trans)}, 'month') }}
+    {% elseif buyType == 20 %}
+    {{ radios('unit', {year: ("vip.buy.radios.year"|trans)}, 'year') }}
+    {% elseif buyType == 30 %}
+    {{ radios('unit', {month: ("vip.buy.radios.month"|trans)}, 'month') }}
+    {% endif %}
+  </div>
+</div>
+
+<span class="js-vip-price hidden" data-vip-price="{{ prices_json }}" data-coin-display="{% if setting('coin.coin_enabled') and setting('coin.price_type') == 'Coin'%}true{% else %}false{% endif %}" data-coin-name="{{ setting('coin.coin_name') }}" data-cash-rate="{{ setting('coin.cash_rate') }}"></span>
+
+<div class="form-group">
+  <div class="col-sm-offset-3 col-sm-8 controls">
+    <input type="text" class="form-control width-input width-input-mini" name="num" id="duration" 
+    {% if buyType == 10 %}
+    value="{{defaultBuyMonth|default(3) }}"
+    {% elseif buyType == 20 %}
+    value="{{defaultBuyYear|default(1) }}"
+    {% elseif buyType == 30 %}
+    value="{{defaultBuyMonth|default(3) }}"
+    {% endif %}
+    >
+    <input type="hidden" name="defaultBuyMonth" 
+    {% if buyType == 10 %}
+    value="{{defaultBuyMonth|default(3) }}"    
+    {% elseif buyType == 30 %}
+    value="{{defaultBuyMonth|default(3) }}"
+    {% endif %}
+    >
+    <input type="hidden" name="defaultBuyYear" 
+    {% if buyType == 10 %}
+    value="{{defaultBuyYear|default(1) }}"
+    {% elseif buyType == 20 %}
+    value="{{defaultBuyYear|default(1) }}"    
+    {% endif %}
+    >
+    <span class="unit-label unit-label-month">{{ 'vip.buy.month' | trans }}</span>
+    <span class="unit-label unit-label-year" style="display:none;">{{ 'vip.buy.year' | trans }}</span>
+    <span class="text-success mll dealine-hint hide">{% if type != 'new' %} {{ 'vip.renew.deadline_time_tips' | trans | raw }} {% else %}  {{ 'vip.buy.deadline_time_tips' | trans  | raw }} {% endif %}</span>
+  </div>
+</div>
+
+<input type="hidden" name="buyType" value="{{ type }}">
+
+<script type="text/plain" data-role="prices">{{ prices|json_encode|raw }}</script>

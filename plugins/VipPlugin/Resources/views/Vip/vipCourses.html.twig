@@ -1,0 +1,17 @@
+{% if courseSets %}
+  <div class="es-piece piece-lg">
+    <div class="piece-header">
+      会员课程
+      <a class="more" href="{{ path('course_set_explore', {filter: {type: 'all',price: 'all',currentLevelId: levelId},orderBy: 'latest'}) }}">更多</a>
+    </div>
+    <div class="course-list">
+      <div class="row">
+        {% for courseSet in courseSets %}
+          <div class="col-lg-3 col-md-4 col-sm-6">
+            {% include 'VipPlugin:Vip:vip-course-grid.html.twig' %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endif %}

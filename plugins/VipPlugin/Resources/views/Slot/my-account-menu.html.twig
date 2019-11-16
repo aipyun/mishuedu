@@ -1,0 +1,5 @@
+{% if is_plugin_installed('Vip')%}
+  <li class="cd-sidebar__item {% if side_nav|default() == 'my-vip-record' %} active {% endif %}">
+    <a href="{{ path('vip_history') }}">{{'user.vip_history_menu'|trans}}</a>
+  </li>
+{% endif %}
