@@ -26,7 +26,8 @@ class Articles extends BaseResource
         $articles = $this->getArticleService()->searchArticles($conditions, $sort, $start, $limit);
         $articles = $this->assemblyArticles($articles);
 
-        return $this->wrap($this->filter($articles), $total);
+        //return $this->wrap($this->filter($articles), $total);
+        return $this->wrap($articles, $total);
     }
 
     public function filter($res)
