@@ -12,11 +12,11 @@ class User extends BaseResource
     );
 
     private $_publicFields = array(
-        'id', 'nickname', 'title', 'point', 'smallAvatar', 'mediumAvatar', 'largeAvatar', 'createdTime', 'updatedTime', 'roles'
+        'id', 'nickname', 'title', 'point', 'smallAvatar', 'mediumAvatar', 'largeAvatar', 'createdTime', 'updatedTime', 'roles','truename','mobile','signature','about'
     );
 
     private $_publicProfileFields = array(
-        'about'
+        'about','signature'
     );
 
     private $_privateFields = array(

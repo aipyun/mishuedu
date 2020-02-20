@@ -32,6 +32,7 @@ class Users extends BaseResource
             return $this->wrap($this->filter($users), $next);
         } else {
             $users = $this->getUserService()->searchUsers($conditions, array('createdTime' => 'DESC'), $start, $limit);
+            $users = $this->assemblyUserProfile($users);
             $total = $this->getUserService()->countUsers($conditions);
             return $this->wrap($this->filter($users), $total);
         }
@@ -125,6 +126,28 @@ class Users extends BaseResource
     protected function getUserService()
     {
         return ServiceKernel::instance()->createService('User:UserService');
+    }
+
+    protected function assemblyUserProfile($users)
+    {
+        $id = ArrayToolkit::column($users, 'id');
+        $profiles = $this->getUserService()->findUserProfilesByIds($id);
+
+        foreach ($profiles as &$profile) {
+            if (isset($profiles[$profile['id']])) {
+                $profile['profile'] = array(
+                    'id' => $profiles[$profile['id']]['id'],
+                    'truename' => $profiles[$profile['id']]['truename'],
+                    'mobile' => $profiles[$profile['id']]['mobile'],
+                    'signature' => $profiles[$profile['id']]['signature'],
+                    'about' => $profiles[$profile['id']]['about'],
+                );
+            } else {
+                $profile['profile'] = array();
+            }
+        }
+
+        return $profiles;
     }
 
     /**
