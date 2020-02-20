@@ -133,21 +133,19 @@ class Users extends BaseResource
         $id = ArrayToolkit::column($users, 'id');
         $profiles = $this->getUserService()->findUserProfilesByIds($id);
 
-        foreach ($profiles as &$profile) {
-            if (isset($profiles[$profile['id']])) {
-                $profile['profile'] = array(
-                    'id' => $profiles[$profile['id']]['id'],
-                    'truename' => $profiles[$profile['id']]['truename'],
-                    'mobile' => $profiles[$profile['id']]['mobile'],
-                    'signature' => $profiles[$profile['id']]['signature'],
-                    'about' => $profiles[$profile['id']]['about'],
-                );
+        foreach ($users as $key =>$value) {
+            if (isset($profiles[$value['id']])) {
+
+                $users[$key]['truename'] = $profiles[$value['id']]['truename'];
+                $users[$key]['mobile'] = $profiles[$value['id']]['mobile'];
+                $users[$key]['signature'] = $profiles[$value['id']]['signature'];
+                $users[$key]['about'] = $profiles[$value['id']]['about'];
             } else {
-                $profile['profile'] = array();
+                $users[$key] = array();
             }
         }
 
-        return $profiles;
+        return $users;
     }
 
     /**
