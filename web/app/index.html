@@ -1,0 +1,331 @@
+<!doctype html>
+<html class="no-js" lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit">
+<title>APP下载页面 </title>
+<meta charset="utf-8">
+<meta name="keywords" content="mishuedu,秘书e学">
+<meta name="description" content="秘书e学">
+<meta name="author" content="秘书e学">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" id="suofang1" content="width=device-width, initial-scale=1, maximum-scale=10, user-scalable=0">
+<!--Through the shortcut to open the full screen-->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="format-detection" content="telephone=no">
+<!--ios web clip-->
+<meta name="msapplication-tap-highlight" content="no">
+ 
+
+<link rel="icon" href="images/favicon.ico">
+<link rel="shortcut icon" href="images/favicon.ico">
+<link href="favicon.ico" mce_href="images/favicon.ico" rel="bookmark" type="image/x-icon" />
+	
+<link rel="stylesheet" href="css/dialog.css">
+<link rel="stylesheet" href="css/base.css">
+
+
+
+ 
+<style type="text/css">
+.weui-loadmore {
+	width: 100%;
+	margin-top: 0px;
+	padding-top: 10px;
+}
+</style>
+
+
+<style>
+.page__ft {
+	display: none
+}
+
+#scrollContainer-inner {
+	height: 100%;
+}
+
+.items {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	z-index: 1;
+}
+
+.itemsx{
+	position: relative;
+	width: 100%;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.baie-footer {
+	margin: 0 auto;
+}
+
+.itemButton {
+	width: 193px;
+	background-color: rgba(254, 254, 254, 0);
+	border: 2px rgb(254, 254, 254) solid;
+	border-radius: 10px;
+	color: rgb(254, 254, 254);
+	height: 53px;
+}
+
+.itemButton2 {
+	margin-top: 28px;
+}
+
+.browser{
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	z-index: 2;
+	display: none;
+}
+</style>
+
+
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.dialog.min.js"></script>
+<script src="js/cgodo.lang.js" charset="utf-8"></script>
+
+<script>
+	var LSD = LSD || {};
+	var isApp = false
+
+	LSD.alert = function(text, callback, time) {
+		var alertDialog = dialog({
+			fixed : true,
+			title : '~~~~~~~~',
+			content : text,
+			okValue : '确定',
+			ok : function() {
+				if (callback && $.isFunction(callback)) {
+					var dialog = this;
+					callback(dialog);
+					return false;
+				}
+			},
+			quickClose : true
+		}).showModal()
+
+		if (time && typeof time === 'number') {
+			setTimeout(function() {
+				alertDialog.close().remove();
+			}, time)
+		}
+	};
+	
+	var postMessageHandler = {};
+	
+	/**
+	 * 生成返回链接
+	 * @param selector
+	 */
+	function setReturnUrl(selector,options) {
+		$(selector).on('click', 'a', function(){
+			var my = $(this);
+			var href = my.attr('href');
+			var bakHref = location.href;
+			var pageNo = $("input[name='pageNo']").val();
+
+			
+			if(options) {
+				if(options.scrollTop) {
+					bakHref = clearParam(bakHref, 'scrollTop');
+					bakHref = $.addParam(bakHref, 'scrollTop', $('#scrollContainer').scrollTop());
+				}
+			}
+			
+			bakHref = bakHref+ '&initLoading='+pageNo 
+			href = href.replace('{location.href}',encodeURIComponent(bakHref));
+			my.attr('href',href);
+			return true;
+		});
+	}
+
+	function clearParam(href, name) {
+		var index=href.indexOf(name+'=');
+		
+		if(index >=0) {
+			
+			var newHref = href.substring(0, index - 1);
+			
+			return newHref;
+		}else{
+			return href;
+		}
+	}
+	
+	
+	function uploadAsApp(id){
+		if(window.postMessage && window.isApp){
+			window.postMessage(JSON.stringify({type:'upload',id:id}));
+		}
+	}
+	
+	function registerPostMessageHandler(id,type,handler){
+		if(id) {
+			postMessageHandler[id+type]=handler;
+		} else {
+			postMessageHandler[type]=handler;
+		}
+	}
+	
+	$(function(){
+		LSD.LayoutPort = {
+		        width: document.body.getBoundingClientRect().width,
+		        height: document.body.getBoundingClientRect().height
+		    }
+		
+		LSD.ViewPort = {
+			    width: document.documentElement.clientWidth,
+			    height: document.documentElement.clientHeight
+			}
+		
+		document.addEventListener('message', function(e) {
+		    var message = eval('('+e.data+')');
+
+		    if (message.id) {
+		        //id+type确定处理函数;
+		    	var handler = postMessageHandler[message.id+message.type];
+		    	
+		    	if(handler){
+		    		handler(message);
+		    	}
+		    } else {
+		    	//id确定处理函数
+		    	var handler = postMessageHandler[message.type];
+		    	
+		    	if(handler){
+		    		handler(message);
+		    	}
+		    }
+		});
+		
+	})
+</script>
+<script>
+	//window.location.href='https://www.mishuedu.com/mishuedu.apk?t='+new Date()
+	$(function() {
+		// 这里做下说明，$("<img/>")这里是创建一个临时的img标签，类似js创建一个new Image()对象！
+		var newImg = $("<img/>").load(function() {
+			var bgHeight = $('.bg').find('img').height();
+			var x = 724 * (bgHeight / 1344);
+			$('.item1').css('marginTop', x + 'px');
+		});
+		newImg.attr("src", $('.bg').find('img').attr('src'));
+	});
+	
+	function toItem(url) {
+		if(isWechat){
+			$('.browser').show();
+		} else {
+			window.location.href=url;
+		}
+	}
+</script>
+
+
+</head>
+<body>
+	<div class="grid-inner">
+		<div class="page js-show" id="scrollContainer" id="topAnchor">
+			<div id="scrollContainer-inner">
+
+<div></div>
+ 
+<div class="items" style="position: relative;">
+	<div class="bg">
+		<img src="images/beijing.png"
+			style="width: 100%;" />
+	</div>
+	
+	<div class="browser">
+		<img src="images/mengban.png"
+			style="width: 100%;" />
+	</div>
+	<div class="items">
+		<div class="itemsx">
+			<div class="baie-footer  item1" style="width: 320px;">
+				<button type="submit" name="submit-btn" id="form_btn"
+					class="itemButton "
+					style=""
+					onclick="toItem('http://android.myapp.com/myapp/detail.htm?apkName=com.lsiding.zixiaoapp')">
+					安卓应用宝下载</button>
+			</div>
+			
+			<div class="baie-footer" style="width: 320px;">
+				<button type="submit" name="submit-btn" id="form_btn"
+					class="itemButton itemButton2" style=""
+					onclick="toItem('https://www.mishuedu.com/mishuedu.apk')">
+					安卓本地下载</button>
+			</div>
+			
+			<div class="baie-footer" style="width: 320px;">
+				<button type="submit" name="submit-btn" id="form_btn"
+					class="itemButton itemButton2"
+					style=""
+					onclick="LSD.alert('ios正在努力开发中^_^')">IOS近期上线</button>
+			</div>
+		</div>
+	</div>
+</div>
+ 
+
+				<div class="page__ft"></div>
+			</div>
+		</div>
+		  
+		<!-- loading toast -->
+		<div id="loadingToast" style="display: none;">
+			<div class="weui-mask_transparent"></div>
+			<div class="weui-toast">
+				<i class="weui-loading weui-icon_toast"></i>
+				<p class="weui-toast__content">数据加载中</p>
+			</div>
+		</div>
+	</div>
+	<script>
+		$(function() {
+			document.querySelector('#scrollContainer-inner').style.minHeight = document.documentElement.clientHeight
+					+ 10 + 'px';
+			$('.site-header').next().css('margin-top','45px');
+		});
+
+		$(function() {
+			/*form validator*/
+			$('#ajaxFormValidator').length ? AjaxValidator('ajaxFormValidator',
+					'errors_box') : '';
+		})
+		$(function(){
+		    var $fixedNav = $('.fixed-nav'),
+		        fixedLeft = LSD.LayoutPort.width + (LSD.ViewPort.width - LSD.LayoutPort.width) / 2 - 62
+		
+		    // $fixedNav.css('left', fixedLeft + 'px').addClass('fadein').addClass('fadein');
+		    $fixedNav.addClass('fadein').addClass('fadein');
+		
+		
+		    $('#scrollContainer').on('scroll', function() {
+		        var scrollTopHeight = $('#scrollContainer').scrollTop();
+		        if (scrollTopHeight > 400) {
+		            $('.back2top').css('display', 'block')
+		        } else {
+		            $('.back2top').css('display', 'none')
+		        }
+		    });
+		
+		    $('.back2top').on('click', function(e) {
+		        $('html, body, #scrollContainer').animate({
+		            scrollTop : 0
+		        }, 100)
+		        e.preventDefault();
+		    })
+		})
+	</script>
+</body>
+</html>
+

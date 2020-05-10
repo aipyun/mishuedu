@@ -1,0 +1,323 @@
+/*dialog*/
+.dialog-popup-backdrop{
+    z-index: 1023!important
+}
+.dialog-arrow-a,
+.dialog-arrow-b {
+    position: absolute;
+    display: block;
+    width: 0;
+    height: 0;
+    overflow:hidden;
+    line-height:0;
+    font-size: 0;
+    _color:#FF3FFF;
+    _filter:chroma(color=#FF3FFF);
+}
+.popup-top-left .dialog-arrow-a,
+.popup-top .dialog-arrow-a,
+.popup-top-right .dialog-arrow-a {
+    bottom: -8px;
+    border-top:8px solid #7C7C7C;
+    border-bottom:0 none;
+    border-left:8px solid transparent;
+    border-right:8px solid transparent;
+}
+.popup-top-left .dialog-arrow-b,
+.popup-top .dialog-arrow-b,
+.popup-top-right .dialog-arrow-b {
+    bottom: -7px;
+    border-top:8px solid #fff;
+    border-bottom:0 none;
+    border-left:8px solid transparent;
+    border-right:8px solid transparent;
+}
+.popup-top-left .dialog-arrow-a,
+.popup-top-left .dialog-arrow-b  {
+    left: 15px;
+}
+.popup-top .dialog-arrow-a,
+.popup-top .dialog-arrow-b  {
+    left: 50%;
+    margin-left: -8px;
+}
+.popup-top-right .dialog-arrow-a,
+.popup-top-right .dialog-arrow-b {
+    right: 15px;
+}
+.popup-bottom-left .dialog-arrow-a,
+.popup-bottom .dialog-arrow-a,
+.popup-bottom-right .dialog-arrow-a {
+    top: -8px;
+    border-bottom:8px solid #7C7C7C;
+    border-top:0 none;
+    border-left:8px solid transparent;
+    border-right:8px solid transparent;
+}
+.popup-bottom-left .dialog-arrow-b,
+.popup-bottom .dialog-arrow-b,
+.popup-bottom-right .dialog-arrow-b {
+    top: -7px;
+    border-bottom:8px solid #fff;
+    border-top:0 none;
+    border-left:8px solid transparent;
+    border-right:8px solid transparent;
+}
+.popup-bottom-left .dialog-arrow-a,
+.popup-bottom-left .dialog-arrow-b {
+    left: 15px;
+}
+.popup-bottom .dialog-arrow-a,
+.popup-bottom .dialog-arrow-b {
+    margin-left: -8px;
+    left: 50%;
+}
+.popup-bottom-right .dialog-arrow-a,
+.popup-bottom-right .dialog-arrow-b {
+    right: 15px;
+}
+.popup-left-top .dialog-arrow-a,
+.popup-left .dialog-arrow-a,
+.popup-left-bottom .dialog-arrow-a {
+    right: -8px;
+    border-left:8px solid #7C7C7C;
+    border-right:0 none;
+    border-top:8px solid transparent;
+    border-bottom:8px solid transparent;
+}
+.popup-left-top .dialog-arrow-b,
+.popup-left .dialog-arrow-b,
+.popup-left-bottom .dialog-arrow-b {
+    right: -7px;
+    border-left:8px solid #fff;
+    border-right:0 none;
+    border-top:8px solid transparent;
+    border-bottom:8px solid transparent;
+}
+.popup-left-top .dialog-arrow-a,
+.popup-left-top .dialog-arrow-b {
+    top: 15px;
+}
+.popup-left .dialog-arrow-a,
+.popup-left .dialog-arrow-b {
+    margin-top: -8px;
+    top: 50%;
+}
+.popup-left-bottom .dialog-arrow-a,
+.popup-left-bottom .dialog-arrow-b {
+    bottom: 15px;
+}
+.popup-right-top .dialog-arrow-a,
+.popup-right .dialog-arrow-a,
+.popup-right-bottom .dialog-arrow-a {
+    left: -8px;
+    border-right:8px solid #7C7C7C;
+    border-left:0 none;
+    border-top:8px solid transparent;
+    border-bottom:8px solid transparent;
+}
+.popup-right-top .dialog-arrow-b,
+.popup-right .dialog-arrow-b,
+.popup-right-bottom .dialog-arrow-b {
+    left: -7px;
+    border-right:8px solid #fff;
+    border-left:0 none;
+    border-top:8px solid transparent;
+    border-bottom:8px solid transparent;
+}
+.popup-right-top .dialog-arrow-a,
+.popup-right-top .dialog-arrow-b {
+    top: 15px;
+}
+.popup-right .dialog-arrow-a,
+.popup-right .dialog-arrow-b {
+    margin-top: -8px;
+    top: 50%;
+}
+.popup-right-bottom .dialog-arrow-a,
+.popup-right-bottom .dialog-arrow-b {
+    bottom: 15px;
+}
+
+.dialog-wrapper{
+    padding-left: 6px;
+    padding-right: 6px;
+}
+.dialog-grid{
+    background-color: #ffffff;
+    border-radius: 5px;
+    border: 1px solid #e4e4e4;
+}
+.dialog-alert3-container .dialog-grid{
+    border: none
+}
+.dialog-header{
+    position: relative;
+    background-color: #f3f3f3;
+    border-radius: 5px 5px 0 0;
+}
+.dialog-title{
+    padding: 12px 35px 12px 15px;
+    border-bottom: 1px solid #e4e4e4;
+    font-weight: 500;
+    font-size: 16px;
+    color: #666666;
+}
+.dialog-close{
+    position: absolute;
+    right: 0;
+    top: 50%;
+    margin-top: -21px;
+    width: 42px;
+    height: 42px;
+    line-height: 1.5;
+    text-align: center;
+    font-size: 28px;
+}
+.dialog-close:link,.dialog-close:visited{
+    text-decoration: none;
+    color: #666666;
+}
+.dialog-close:hover,.dialog-close:active{
+    color: #161616;
+}
+
+.dialog-body{
+    max-width: 600px;
+}
+
+.dialog-content {
+	text-align: center;
+}
+.dialog-content-inner{
+    padding: 12px 12px 0;
+    overflow: hidden;
+    zoom: 1;
+}
+.dialog-error{
+    margin-top: 6px;
+    font-size: 13px;
+    color: #ea5404;
+}
+.dialog-table{
+    width: 100%;
+}
+.dialog-table thead th,
+.dialog-table tbody td{
+    padding: 3px;
+    text-align: center;
+    font-size: 14px;
+    border:1px dotted #e4e4e4;
+}
+.dialog-table thead th{
+    color: #838383;
+}
+.dialog-table tbody td{
+    color: #161616;
+}
+.
+.dialog-content .form-textarea,
+.dialog-content .form-input{
+    padding: 10px 8px;
+    width: 100%;
+    border: 1px solid #e4e4e4;
+    font-size: 14px;
+}
+.dialog-content .form-textarea{
+    resize: none;
+}
+.dialog-content .form-input-precent60{
+    width: 60%;
+}
+
+.dialog-footer{
+    border-radius: 0 0 5px 5px;
+}
+
+.dialog-action{
+    padding: 15px;
+    min-width: 280px;
+    text-align: center
+}
+
+.dialog-footer button{
+    display: inline-block;
+    padding: 8px 15px;
+    margin-bottom: 0;
+    min-width: 120px;
+    font-size: 14px;
+    font-weight: normal;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 3px;
+}
+
+.dialog-footer button{
+    color: #161616;
+    background-color: #ffffff;
+    border-color: #cccccc;
+}
+
+.dialog-footer button:hover, .dialog-footer button:focus, .dialog-footer button:active {
+    color: #161616;
+    background-color: #ebebeb;
+    border-color: #adadad;
+}
+
+.dialog-footer .dialog-autofocus{
+    color: #ffffff;
+    border-color: #e60122;
+    background-color: #e60122;
+    outline: 0
+}
+.dialog-footer .dialog-autofocus:hover,
+.dialog-footer .dialog-autofocus:focus,
+.dialog-footer .dialog-autofocus:active{
+    color: #ffffff;
+    border-color: #db0a28;
+    background-color: #db0a28;
+}
+
+.dialog-footer button+button{
+    margin-left: 10px;
+}
+
+.dialog-statusbar{
+    text-align: center;
+}
+.dialog-statusbar > * {
+    border-radius: 0 0 5px 5px;
+}
+
+
+.dialog-loading{
+    display:block;
+    margin-top: 15px;
+    text-align: center;
+}
+
+/*dialog-alert*/
+.dialog-alert{
+    padding: 10px 24px;
+}
+
+.drop-element.drop-theme-arrows.drop-element-attached-top.drop-element-attached-center .drop-content:before{
+    bottom: 99%;
+}
+.drop-element.drop-theme-arrows.drop-element-attached-bottom.drop-element-attached-center .drop-content:before{
+    top: 99%;
+}
+.drop-element.drop-theme-arrows .drop-content{
+    min-width: 120px;
+    text-align: center;
+}
